@@ -5,10 +5,10 @@ class Administrator extends Component {
     render() {
         return (
             <div>
-                <Link exact to="/Student" type="button" class="btn btn-light" >Add Student</Link>
-                <Link exact to="/Adddoc" type="button" class="btn btn-light" >Add Doc</Link>
-                <Link exact to="/Student" type="button" class="btn btn-light" >Incoming request</Link>
-                <Link exact to="/Student" type="button" class="btn btn-light" >back</Link>
+                <Link exact={true} to="/AddStudent" type="button" className="btn btn-light" >Add Student</Link>
+                <Link exact={true} to="/Adddoc" type="button" className="btn btn-light" >Add Doc</Link>
+                <Link exact={true} to="/Student" type="button" className="btn btn-light" >Incoming request</Link>
+                <Link exact={true} to="/Student" type="button" className="btn btn-light" >back</Link>
             </div>
         )
     }

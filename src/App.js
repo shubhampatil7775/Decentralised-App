@@ -8,6 +8,7 @@ import Administrator from './components/Administrator';
 import Student from './components/Student';
 import AddDoc from './components/AddDoc';
 import Meme from './abis/Adddoc.json';
+import AddStudent from './components/AddStudent';
 
 
 
@@ -69,20 +70,25 @@ class App extends Component {
         <Router>
   
           <Switch>
-              <Route path="/" exact component={Home}/>
+              <Route path="/" exact={true} component={Home}/>
           </Switch>
   
           <Switch>
-             <Route path="/Administrator" exact component = {Administrator}/> 
+             <Route path="/Administrator"  component = {Administrator}/> 
           </Switch>
   
           
           <Switch>
-             <Route path="/Student" exact component = {Student}/> 
+             <Route path="/Student"  component = {Student}/> 
           </Switch>
   
           <Switch>
-             <Route path="/Adddoc" exact component = {()=><AddDoc contract={this.state.contract} account={this.state.account}/>}/> 
+             <Route path="/Adddoc"  component = {()=><AddDoc contract={this.state.contract} account={this.state.account}/>}/> 
+          </Switch>
+
+
+          <Switch>
+             <Route path="/AddStudent"  component = {AddStudent}/> 
           </Switch>
   
         
