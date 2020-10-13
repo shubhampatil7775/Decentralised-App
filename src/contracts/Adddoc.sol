@@ -3,7 +3,7 @@ pragma solidity >=0.4.22 <0.8.0;
 
 contract Adddoc {
      string memeHash;
-     
+
      struct UserInfo{
 		string FullName;
 		string EmailID;
@@ -36,5 +36,10 @@ contract Adddoc {
     
     function getUser(address ins) view public returns (string memory, string memory, string memory) {
         return (UserMap[ins].FullName,UserMap[ins].EmailID,UserMap[ins].MobileNo );
+    }
+
+    function AddDLRequest(address UserAddress,string RequestedBy, uint DL_No, uint DL_Name, uint DL_DOB, uint DL_Hash, uint DL_Address, uint DL_OverAll_Status)
+    {
+        DLRequestMap[UserAddress].push(DLRequest(RequestedBy, DL_No, DL_Name, DL_DOB, DL_Hash, DL_Address, DL_OverAll_Status));
     }
 }

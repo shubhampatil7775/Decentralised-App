@@ -5,10 +5,11 @@ class Student extends Component {
     render() {
         return (
             <div>
-                <Link exact={true} to="/Adddoc" type="button" class="btn btn-light" >Add Doc</Link>
-                <Link exact={true} to="/Student" type="button" class="btn btn-light" >See uploaded doc</Link>
-                <Link exact={true} to="/Student" type="button" class="btn btn-light" >incoming request</Link>
-                <Link exact={true} to="/Student" type="button" class="btn btn-light" >Back</Link>
+                <Link exact={true} to="/Adddoc" type="button" className="btn btn-light" >Add Doc</Link>
+                <Link exact={true} to="/Student" type="button" className="btn btn-light" >See uploaded doc</Link>
+                <Link exact={true} to="/Student" type="button" className="btn btn-light" >incoming request</Link>
+                <Link exact={true} to="/AddRequest" type="button" className="btn btn-light" >Add request</Link>
+                <Link exact={true} to="/Student" type="button" className="btn btn-light" >Back</Link>
             </div>
         )
     }

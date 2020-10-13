@@ -9,6 +9,7 @@ import Student from './components/Student';
 import AddDoc from './components/AddDoc';
 import Meme from './abis/Adddoc.json';
 import AddStudent from './components/AddStudent';
+import AddRequest from './components/AddRequest';
 
 
 
@@ -90,7 +91,10 @@ class App extends Component {
           <Switch>
              <Route path="/AddStudent"  component = {AddStudent}/> 
           </Switch>
-  
+        
+          <Switch>
+             <Route path="/AddRequest"  component = {AddRequest}/> 
+          </Switch>
         
         </Router>      
         
