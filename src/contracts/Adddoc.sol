@@ -10,8 +10,19 @@ contract Adddoc {
 		string MobileNo;
     }
 
-    address [] public User;
-    mapping(address => UserInfo) UserMap;
+    struct Request{
+        string stuname;
+        string bonafide;
+        string book_bank;
+        string rector;
+        string scholor;
+        string academics;
+        string dochash;
+        uint256 status;
+    }
+
+    mapping(address => UserInfo[]) UserMap;
+    mapping(address => Request[]) RequestMap;
 
 
 
@@ -26,20 +37,30 @@ contract Adddoc {
 
     function AddUser(address UserAddress,string memory FullName,string memory EmailID,string memory MobileNo) public
     {
-        UserMap[UserAddress]=UserInfo(FullName,EmailID,MobileNo);
-        User.push(UserAddress);
+        UserMap[UserAddress].push(UserInfo(FullName,EmailID,MobileNo));
     }
+    
 
-    function getUsers() view public returns (address[] memory) {
-        return User;
+    function getUser(address ins,uint256 UserIndex) view public returns (string memory, string memory, string memory) {
+        UserInfo memory ThisUser=UserMap[ins][UserIndex];
+        return (ThisUser.FullName, ThisUser.EmailID, ThisUser.MobileNo);
     }
-
-    function getUser(address ins) view public returns (string memory, string memory, string memory) {
-        return (UserMap[ins].FullName,UserMap[ins].EmailID,UserMap[ins].MobileNo );
-    }
-
-    function AddDLRequest(address UserAddress,string RequestedBy, uint DL_No, uint DL_Name, uint DL_DOB, uint DL_Hash, uint DL_Address, uint DL_OverAll_Status)
+    
+    function AddRequest(address UserAddress,string memory stuname,string memory bonafide,string memory book_bank,string memory rector,string memory scholor,string memory academics,string memory dochash,uint status ) public
     {
-        DLRequestMap[UserAddress].push(DLRequest(RequestedBy, DL_No, DL_Name, DL_DOB, DL_Hash, DL_Address, DL_OverAll_Status));
+        RequestMap[UserAddress].push(Request(stuname,bonafide,book_bank,rector,scholor,academics,dochash,status));
     }
+    
+    function ViewRequestLength(address UserAddress) view public returns(uint)
+    {
+        return RequestMap[UserAddress].length;
+    }
+    
+    function ViewRequestHeader(address UserAddress, uint RequestIndex) view public returns(string memory stuname, uint status)
+    {
+        Request memory ThisRequest=RequestMap[UserAddress][RequestIndex];
+        return (ThisRequest.stuname, ThisRequest.status);
+    }
+   
 }
+                                                                                                                                

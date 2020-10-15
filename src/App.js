@@ -10,6 +10,7 @@ import AddDoc from './components/AddDoc';
 import Meme from './abis/Adddoc.json';
 import AddStudent from './components/AddStudent';
 import AddRequest from './components/AddRequest';
+import ViewRequest from './components/ViewRequest';
 
 
 
@@ -96,6 +97,10 @@ class App extends Component {
              <Route path="/AddRequest"  component = {AddRequest}/> 
           </Switch>
         
+          <Switch>
+             <Route path="/ViewRequest"  component = {ViewRequest}/> 
+          </Switch>
+
         </Router>      
         
       </div>

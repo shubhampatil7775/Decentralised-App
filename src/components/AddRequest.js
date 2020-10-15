@@ -36,6 +36,60 @@ class AddRequest extends Component {
   
       }
 
+      
+    AddRequest=async(event)=> {
+
+        var _stuname = document.getElementById("txtStudentName").value;
+        var stuname=0;
+        var bonafide=0;
+        var book_bank=0;
+        var rector=0;
+        var scholor=0;
+        var academics=0;
+        var dochash=0;
+        var status=1;
+
+     if(document.getElementById("bonafide").checked)
+	{
+		bonafide=1;
+	}
+
+	if(document.getElementById("book_bank").checked)
+	{
+		book_bank=1;
+	}
+	
+	if(document.getElementById("rector").checked)
+	{
+		rector=1;
+	}
+	
+	if(document.getElementById("scholorship").checked)
+	{
+		scholor=1;
+	}
+	
+	if(document.getElementById("academics").checked)
+	{
+		academics=1;
+    }
+    
+    if(document.getElementById("dochash").checked)
+	{
+		dochash=1;
+    }
+    
+
+        this.state.sch.methods.AddRequest(this.state.currentuser,_stuname,bonafide,book_bank,rector,scholor,academics,dochash,status).send({ from: this.state.currentuser }).then((r) => {
+          console.log(r);
+          //return this.setState(r)
+          
+       });
+  
+       
+  
+      }
+
 
 
     render() {
@@ -71,7 +125,7 @@ class AddRequest extends Component {
                         <tbody>
 						<tr>
 							<td width="10%">
-								<input id="chk_DL_No" type="checkbox" name="chk_DL_No"/>
+								<input id="bonafide" type="checkbox" name="bonafide"/>
 							</td>
 							<td width="90%">
 								Bonafide Certificate
@@ -79,7 +133,7 @@ class AddRequest extends Component {
 						</tr>
 						<tr>
 							<td width="10%">
-								<input id="chk_DL_Name" type="checkbox" name="chk_DL_Name"/>
+								<input id="book_bank" type="checkbox" name="book_bank"/>
 							</td>
 							<td width="90%">
 								Book Bank
@@ -87,7 +141,7 @@ class AddRequest extends Component {
 						</tr>
 						<tr>
 							<td width="10%">
-								<input id="chk_DL_DOB" type="checkbox" name="chk_DL_DOB" />
+								<input id="rector" type="checkbox" name="rector" />
 							</td>
 							<td width="90%">
 								Rector Docs
@@ -95,7 +149,7 @@ class AddRequest extends Component {
 						</tr>
 						<tr>
 							<td width="10%">
-								<input id="chk_DL_Hash" type="checkbox" name="chk_DL_Hash"/>
+								<input id="scholorship" type="checkbox" name="scholorship"/>
 							</td>
 							<td width="90%">
 								Scholorship
@@ -103,17 +157,25 @@ class AddRequest extends Component {
 						</tr>
 						<tr>
 							<td width="10%">
-								<input id="chk_DL_Address" type="checkbox" name="chk_DL_Address" />
+								<input id="academics" type="checkbox" name="academics" />
 							</td>
 							<td width="90%">
 								Academics Fees
+							</td>
+						</tr>
+                        <tr>
+							<td width="10%">
+								<input id="dochash" type="checkbox" name="dochash" />
+							</td>
+							<td width="90%">
+								Documeny hash
 							</td>
 						</tr>
                         </tbody>
 					</table>
 					
 					<div className="aligncenter">
-						<button type="button" className="btn btnsm btn-primary">Request Access</button>
+						<button type="button" className="btn btnsm btn-primary" onClick={this.AddRequest}>Request Access</button>
 					</div>
 
 				</div>

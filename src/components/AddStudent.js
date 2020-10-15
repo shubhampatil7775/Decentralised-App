@@ -122,6 +122,7 @@ class AddStudent extends Component {
                     
 					<div className="aligncenter">
 						<button type="button" className="btn btnsm btn-primary" onClick={this.Adduser}>Create Wallet</button>
+            <button onClick={this.Adduser}>hi</button>
 					</div>
 				</div>
 			</div>

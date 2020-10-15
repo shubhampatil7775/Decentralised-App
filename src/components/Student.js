@@ -7,7 +7,7 @@ class Student extends Component {
             <div>
                 <Link exact={true} to="/Adddoc" type="button" className="btn btn-light" >Add Doc</Link>
                 <Link exact={true} to="/Student" type="button" className="btn btn-light" >See uploaded doc</Link>
-                <Link exact={true} to="/Student" type="button" className="btn btn-light" >incoming request</Link>
+                <Link exact={true} to="/ViewRequest" type="button" className="btn btn-light" >View request</Link>
                 <Link exact={true} to="/AddRequest" type="button" className="btn btn-light" >Add request</Link>
                 <Link exact={true} to="/Student" type="button" className="btn btn-light" >Back</Link>
             </div>
