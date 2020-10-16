@@ -11,6 +11,7 @@ import Meme from './abis/Adddoc.json';
 import AddStudent from './components/AddStudent';
 import AddRequest from './components/AddRequest';
 import ViewRequest from './components/ViewRequest';
+import ViewRequestDetail from './components/ViewRequestDetail';
 
 
 
@@ -63,6 +64,7 @@ class App extends Component {
     }
     
   }
+  
 
   render() {
       return (
@@ -101,7 +103,12 @@ class App extends Component {
              <Route path="/ViewRequest"  component = {ViewRequest}/> 
           </Switch>
 
-        </Router>      
+          <Switch>
+             <Route path="/ViewRequestDetail"  component = {ViewRequestDetail}/> 
+          </Switch>
+
+        </Router>   
+         
         
       </div>
       )

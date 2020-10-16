@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Web3 from 'web3';
 import Sch from '../abis/Adddoc.json';
+import ReactDOM from 'react-dom';
+import ViewRequestDetail from './ViewRequestDetail';
+import {BrowserRouter as Router,Link,NavLink,Route,Redirect,Switch} from 'react-router-dom';
 
 
 class ViewRequest extends Component {
@@ -11,9 +14,12 @@ class ViewRequest extends Component {
         this.state={
           currentuser:null,
           sch:null,
-          RequestLength:null
+          RequestLength:null,
+          ind:0,
+          Stunam:null
         } 
-        this.ViewRequestDetail= this.ViewRequestDetail.bind(this);
+        
+
       }
   
   
@@ -42,7 +48,7 @@ class ViewRequest extends Component {
 
       ViewRequestLength() {
 
-        this.state.sch.methods.ViewRequestLength(this.state.currentuser).call({from:this.state.currentOwner},(error,result)=>{
+        this.state.sch.methods.ViewRequestLength(this.state.currentuser).call({from:this.state.currentuser},(error,result)=>{
             if(!error)
             {
                 
@@ -68,23 +74,20 @@ class ViewRequest extends Component {
         });
     };
 
-    ViewRequestDetail=async(index, StuName)=>
-    {
+    ViewRequestForm=async(index, StuName)=>
+    {   
+        
         var Frm = document.IntelitixForm;
+        //console.log(Frm)
         Frm.hdnRequestIndex.value = index;
         Frm.hdnStuName.value = StuName;
-        Frm.submit();
+       // Frm.submit();
     }
-
-    try=async()=> {
-        console.log("hello")
-
-    }
-
 
     ViewRequestHeader(index)
     {
         var requestlistparent = document.getElementById("requestlistparent");
+       
         
         this.state.sch.methods.ViewRequestHeader(this.state.currentuser,index).call({from:this.state.currentOwner},(error,result)=>{
             if(!error)
@@ -99,7 +102,17 @@ class ViewRequest extends Component {
                 if(ApprovalStatus == "1")
                 {
                     ApprovalStatusText = "Waiting Approval";
-                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"<td><button type='button' id='notwork' class='btn btnsm btn-primary' >More Info</button></td></tr>";
+			
+                this.state.ind=index;
+                this.state.Stunam=StuName;
+                //console.log(this.state.ind)
+
+                var temnewText  = document.createElement('BUTTON');
+                temnewText.innerHTML="Accept";
+                temnewText.onclick=()=>{ 
+                };
+                var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>"+temnewText.outerHTML+"</td></tr>";
+                           
                 }
                 else if(ApprovalStatus == "2")
                 {
@@ -124,15 +137,24 @@ class ViewRequest extends Component {
                 console.log(error);
             }
         })
+     
+        
 
     }
 
-   
+    handleSubmit=async(event)=> {
+        event.preventDefault()
+        //console.log(this.state.ind)
+        document.location="ViewRequestDetail"
+        
+    }
+
 
     render() {
         return (
-            <div>
-                <form name="IntelitixForm" method="post" action="ViewRequestDetail">
+            <div> 
+                <h1>{this.state.ind}</h1>
+                <form name="IntelitixForm" onSubmit={this.handleSubmit}>
                 <div className="container container_body">
                     <div className="row">
                         <div className="col-md-6 center-block">
@@ -149,6 +171,7 @@ class ViewRequest extends Component {
                                             <td width="20" align="center"><b>More Info</b></td>
                                         </tr>
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>

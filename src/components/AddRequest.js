@@ -52,12 +52,9 @@ class AddRequest extends Component {
      if(document.getElementById("bonafide").checked)
 	{
 		bonafide=1;
+		//console.log(bonafide)
 	}
 
-	if(document.getElementById("book_bank").checked)
-	{
-		book_bank=1;
-	}
 	
 	if(document.getElementById("rector").checked)
 	{
@@ -80,7 +77,7 @@ class AddRequest extends Component {
     }
     
 
-        this.state.sch.methods.AddRequest(this.state.currentuser,_stuname,bonafide,book_bank,rector,scholor,academics,dochash,status).send({ from: this.state.currentuser }).then((r) => {
+        this.state.sch.methods.AddRequest(this.state.currentuser,_stuname,bonafide,rector,scholor,academics,dochash,status).send({ from: this.state.currentuser }).then((r) => {
           console.log(r);
           //return this.setState(r)
           
@@ -129,14 +126,6 @@ class AddRequest extends Component {
 							</td>
 							<td width="90%">
 								Bonafide Certificate
-							</td>
-						</tr>
-						<tr>
-							<td width="10%">
-								<input id="book_bank" type="checkbox" name="book_bank"/>
-							</td>
-							<td width="90%">
-								Book Bank
 							</td>
 						</tr>
 						<tr>

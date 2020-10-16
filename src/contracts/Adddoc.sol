@@ -12,13 +12,12 @@ contract Adddoc {
 
     struct Request{
         string stuname;
-        string bonafide;
-        string book_bank;
-        string rector;
-        string scholor;
-        string academics;
-        string dochash;
-        uint256 status;
+        uint bonafide;
+        uint rector;
+        uint scholor;
+        uint academics;
+        uint dochash;
+        uint status;
     }
 
     mapping(address => UserInfo[]) UserMap;
@@ -41,14 +40,14 @@ contract Adddoc {
     }
     
 
-    function getUser(address ins,uint256 UserIndex) view public returns (string memory, string memory, string memory) {
+    function getUser(address ins,uint UserIndex) view public returns (string memory, string memory, string memory) {
         UserInfo memory ThisUser=UserMap[ins][UserIndex];
         return (ThisUser.FullName, ThisUser.EmailID, ThisUser.MobileNo);
     }
     
-    function AddRequest(address UserAddress,string memory stuname,string memory bonafide,string memory book_bank,string memory rector,string memory scholor,string memory academics,string memory dochash,uint status ) public
+    function AddRequest(address UserAddress,string memory stuname,uint bonafide,uint rector,uint scholor,uint academics,uint dochash,uint status ) public
     {
-        RequestMap[UserAddress].push(Request(stuname,bonafide,book_bank,rector,scholor,academics,dochash,status));
+        RequestMap[UserAddress].push(Request(stuname,bonafide,rector,scholor,academics,dochash,status));
     }
     
     function ViewRequestLength(address UserAddress) view public returns(uint)
@@ -61,6 +60,22 @@ contract Adddoc {
         Request memory ThisRequest=RequestMap[UserAddress][RequestIndex];
         return (ThisRequest.stuname, ThisRequest.status);
     }
+
+    function ViewRequestDetail(address UserAddress, uint RequestIndex) view public returns(string memory stuname,uint bonafide,uint rector,uint scholor,uint academics,uint dochash,uint status)
+    {
+        Request memory ThisRequest=RequestMap[UserAddress][RequestIndex];
+        return (ThisRequest.stuname, ThisRequest.bonafide,ThisRequest.rector, ThisRequest.scholor, ThisRequest.academics, ThisRequest.dochash,ThisRequest.status);
+    }
+
+    function UpdateRequestStatus(address UserAddress, uint RequestIndex, uint bonafide,uint rector,uint scholor,uint academics,uint dochash,uint status) public
+    {
+        RequestMap[UserAddress][RequestIndex].bonafide=bonafide;
+		RequestMap[UserAddress][RequestIndex].rector=rector;
+	    RequestMap[UserAddress][RequestIndex].scholor=scholor;
+		RequestMap[UserAddress][RequestIndex].academics=academics;
+		RequestMap[UserAddress][RequestIndex].dochash=dochash;
+		RequestMap[UserAddress][RequestIndex].status=status;
+    }
    
 }
-                                                                                                                                
+                                        
