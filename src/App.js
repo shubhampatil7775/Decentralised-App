@@ -15,6 +15,7 @@ import ViewRequestDetail from './components/ViewRequestDetail';
 import ViewRequestStu from './components/ViewRequestStu';
 import ViewRequestDetailStu from './components/ViewRequestDetailStu';
 import AddUserData from './components/AddUserData';
+import New from './components/New';
 
 
 
@@ -120,6 +121,10 @@ class App extends Component {
 
           <Switch>
              <Route path="/AddUserData"  component = {AddUserData}/> 
+          </Switch>
+
+          <Switch>
+             <Route path="/New"  component = {New}/> 
           </Switch>
 
         </Router>   

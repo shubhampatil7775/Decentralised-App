@@ -3,7 +3,8 @@ import Web3 from 'web3';
 import Sch from '../abis/Adddoc.json';
 import {BrowserRouter as Router,Link,NavLink,Route,Redirect,Switch} from 'react-router-dom';
 
-
+const ipfsClient = require('ipfs-http-client')
+const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
 class ViewRequestDetailStu extends Component {
 
@@ -13,7 +14,8 @@ class ViewRequestDetailStu extends Component {
           currentuser:null,
           sch:null,
           RequestLength:null,
-          Stunam:null,
+		  Stunam:null,
+		  consthash:null
         } 
         
       }
@@ -40,7 +42,21 @@ class ViewRequestDetailStu extends Component {
           this.state.currentuser= await window.web3.eth.getCoinbase();
           this.state.sch = new window.web3.eth.Contract(Sch.abi,Sch.networks['5777'].address);
           this.ViewRequestDetails();
-      }
+	  }
+	  
+	  go() {
+		window.alert("go")
+		console.log("hi")
+	  }
+
+	  showDrivingLicence=async()=>
+	  {	
+		  console.log(this.state.consthash)
+		  document.location = "https://ipfs.io/ipfs/"+this.state.consthash
+		  
+		  
+	  }
+		 
 
       ViewRequestDetails=async()=> {
 
@@ -137,19 +153,47 @@ class ViewRequestDetailStu extends Component {
 			}
 
 			if(dochash > 0)
-			{
+			{		
+				const tryTable=document.getElementById('requestlistchild');
+				const table=tryTable.getElementsByTagName('tbody')[0];
+				
+				var row1=table.insertRow();
+                
+                   
+				var col1=row1.insertCell(0);
+				var newText1  = document.createElement('span');
+				newText1.innerHTML="Required Document";
+				col1.appendChild(newText1);
+				
+				var col1=row1.insertCell(1);
+				var newText1  = document.createElement('span');
 				if(dochash == 2)
 				{
-					var dochash_Status = "<font color='green'><b>Approved</b></font>";
+					newText1.innerHTML="Approved";
+					newText1.style.color="green"
 				}
 				else
 				{
-					var dochash_Status = "<font color='red'><b>Rejected</b></font>";
-					var dochash_Value = "";
+					newText1.innerHTML="Rejected";
 				}
+				col1.appendChild(newText1);
+
+                
+                var col1=row1.insertCell(2);
+                var newText1  = document.createElement('span');
+
+                var temnewText  = document.createElement('BUTTON');
+				temnewText.innerHTML="View";
+				temnewText.onclick=()=>{ 
+					document.location = "https://ipfs.io/ipfs/"+this.state.consthash
+                };
+               
+                newText1.appendChild(temnewText);
+				col1.appendChild(newText1);
+		
+				this.state.consthash=dochash_Value;
 				
-				var listHTML = "<tr><td width='40%'>Address as per Driving Licence</td><td width='20%'>"+dochash_Status+"</td><td width='40%' align='center'>"+dochash_Value+"</td></tr>";
-				requestlistchild.insertAdjacentHTML('beforeend',listHTML);
+	
 			}
 			
 			
@@ -161,12 +205,14 @@ class ViewRequestDetailStu extends Component {
             }
                 
             })
-      }
+	  }
+
+	
+
 
     render() {
         return (
             <div>
-            <form name="IntelitixForm" method="post" action="pubcert.asp">
             <div className="container container_body">
                 <div className="row">
                     <div className="col-md-6 center-block">
@@ -185,14 +231,16 @@ class ViewRequestDetailStu extends Component {
                                 </tbody>
                                 </table>
                                 
-
+							
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </form>
+			<input type="hidden" id="hdnDrivingLicenceHash" name="hdnDrivingLicenceHash" value=""></input>
             </div>
+
+			
         )
     }
 }
