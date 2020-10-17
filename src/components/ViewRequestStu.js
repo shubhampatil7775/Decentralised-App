@@ -3,9 +3,8 @@ import Web3 from 'web3';
 import Sch from '../abis/Adddoc.json';
 import {BrowserRouter as Router,Link,NavLink,Route,Redirect,Switch} from 'react-router-dom';
 
-class ViewRequest extends Component {
+class ViewRequestStu extends Component {
 
-    
     constructor() {
         super();
         this.state={
@@ -64,12 +63,14 @@ class ViewRequest extends Component {
         })
       }
 
-        loop(i) {
+      
+    loop(i) {
         if (i < this.state.RequestLength) new Promise(resolve => {
             this.ViewRequestHeader(i);
             setTimeout(resolve, 1000);
         });
-    };
+    }
+
 
     ViewRequestForm=async(index, StuName)=>
     {   
@@ -95,36 +96,35 @@ class ViewRequest extends Component {
                 
                 StuName = result[0];
                 ApprovalStatus = Number(result[1]); 
+
+                this.state.ind=index;
+                this.state.Stunam=StuName;
+
+                var temnewText  = document.createElement('BUTTON');
+                temnewText.innerHTML="View Data";
+                temnewText.onclick=()=>{ 
+                };
                 
                 if(ApprovalStatus == "1")
                 {
                     ApprovalStatusText = "Waiting Approval";
-			
-                this.state.ind=index;
-                this.state.Stunam=StuName;
-                //console.log(this.state.ind)
-
-                var temnewText  = document.createElement('BUTTON');
-                temnewText.innerHTML="Accept";
-                temnewText.onclick=()=>{ 
-                };
-                var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>"+temnewText.outerHTML+"</td></tr>";
+                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'></td></tr>";
                            
                 }
                 else if(ApprovalStatus == "2")
                 {
                     ApprovalStatusText = "Partially Approved";
-                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>&nbsp;</td></tr>";
+                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>"+temnewText.outerHTML+"</td></tr>";
                 }
                 else if(ApprovalStatus == "3")
                 {
                     ApprovalStatusText = "Approved";
-                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>&nbsp;</td></tr>";
+                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>"+temnewText.outerHTML+"</td></tr>";
                 }
                 else if(ApprovalStatus == "4")
                 {
                     ApprovalStatusText = "Rejected";
-                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>&nbsp;</td></tr>";
+                    var listHTML = "<tr><td>"+StuName+"</td><td>"+ApprovalStatusText+"</td><td align='center'>"+temnewText.outerHTML+"</td></tr>";
                 }
                 
                 requestlistparent.insertAdjacentHTML('beforeend',listHTML);
@@ -139,16 +139,15 @@ class ViewRequest extends Component {
     handleSubmit=async(event)=> {
         event.preventDefault()
         //console.log(this.state.ind)
-        document.location="ViewRequestDetail"
+        document.location="ViewRequestDetailStu"
         
     }
 
 
     render() {
         return (
-            <div> 
-                <h1>{this.state.ind}</h1>
-                <form name="IntelitixForm" onSubmit={this.handleSubmit}>
+            <div>
+            <form name="IntelitixForm" onSubmit={this.handleSubmit}>
                 <div className="container container_body">
                     <div className="row">
                         <div className="col-md-6 center-block">
@@ -172,12 +171,10 @@ class ViewRequest extends Component {
                         </div>
                     </div>
                 </div>
-                <input type="hidden" id="hdnRequestIndex" name="hdnRequestIndex" ></input>
-                <input type="hidden" id="hdnInstitutionName" name="hdnInstitutionName" ></input>
                 </form>
             </div>
         )
     }
 }
 
-export default ViewRequest
+export default ViewRequestStu

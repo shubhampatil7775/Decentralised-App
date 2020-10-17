@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Web3 from 'web3';
 import Sch from '../abis/Adddoc.json';
+import {BrowserRouter as Router,Link,NavLink,Route,Redirect,Switch} from 'react-router-dom';
 
 
 
@@ -52,7 +53,7 @@ class ViewRequestDetail extends Component {
 
         var requestlistchild = document.getElementById("requestlistchild");
 
-          this.state.sch.methods.ViewRequestDetail(this.state.currentuser,2).call({from:this.state.currentuser},(error,result)=>{
+          this.state.sch.methods.ViewRequestDetail(this.state.currentuser,0).call({from:this.state.currentuser},(error,result)=>{
             //console.log(this.props.inde)
             if(!error)
 		    {
@@ -193,7 +194,7 @@ class ViewRequestDetail extends Component {
             Status = 2;
         }
  
-        this.state.sch.methods.UpdateRequestStatus(this.state.currentuser,2,this.state.bonafide,this.state.rector,this.state.scholor,this.state.academics,this.state.dochash,Status).send({ from: this.state.currentuser }).then((r) => {
+        this.state.sch.methods.UpdateRequestStatus(this.state.currentuser,0,this.state.bonafide,this.state.rector,this.state.scholor,this.state.academics,this.state.dochash,Status).send({ from: this.state.currentuser }).then((r) => {
             console.log(r);
             //return this.setState(r)
             
@@ -211,7 +212,7 @@ class ViewRequestDetail extends Component {
                     <div className="col-md-6 center-block">
                         <div className="panel panel-info">
                             <div className="panel-heading">
-                                <h3 className="panel-title">View Access Request</h3>
+                                <h3 className="panel-title">View Requested Data</h3>
                             </div>
                             <div className="panel-body">
                                 <table className="table table-bordered" id="requestlistparent">

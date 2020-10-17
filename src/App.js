@@ -12,6 +12,9 @@ import AddStudent from './components/AddStudent';
 import AddRequest from './components/AddRequest';
 import ViewRequest from './components/ViewRequest';
 import ViewRequestDetail from './components/ViewRequestDetail';
+import ViewRequestStu from './components/ViewRequestStu';
+import ViewRequestDetailStu from './components/ViewRequestDetailStu';
+import AddUserData from './components/AddUserData';
 
 
 
@@ -105,6 +108,18 @@ class App extends Component {
 
           <Switch>
              <Route path="/ViewRequestDetail"  component = {ViewRequestDetail}/> 
+          </Switch>
+
+          <Switch>
+             <Route path="/ViewRequestStu"  component = {ViewRequestStu}/> 
+          </Switch>
+
+          <Switch>
+             <Route path="/ViewRequestDetailStu"  component = {ViewRequestDetailStu}/> 
+          </Switch>
+
+          <Switch>
+             <Route path="/AddUserData"  component = {AddUserData}/> 
           </Switch>
 
         </Router>   

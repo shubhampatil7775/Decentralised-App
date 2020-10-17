@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Web3 from 'web3';
 import Sch from '../abis/Adddoc.json';
+import {BrowserRouter as Router,Link,NavLink,Route,Redirect,Switch} from 'react-router-dom';
 
 class AddRequest extends Component {
 
